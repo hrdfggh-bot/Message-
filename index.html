@@ -8,13 +8,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; text-align: center; transition: background 2s ease; }
+        body { background: #121212; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; text-align: center; transition: background 1s ease; }
         
-        /* الحاوية الأساسية */
-        .container { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .container { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; }
         
         /* المشهد 1: الظرف المغلق */
-        #scene-1 { transition: opacity 0.5s ease; }
+        #scene-1 { transition: opacity 0.3s ease; }
         .envelope { width: 250px; height: 150px; background: #2c3e50; border-radius: 10px; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; margin-bottom: 30px; border: 2px solid #34495e; }
         .envelope::before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 125px solid transparent; border-right: 125px solid transparent; border-top: 75px solid #1a252f; }
         .envelope-text { position: relative; z-index: 2; font-weight: bold; font-size: 20px; color: #ecf0f1; margin-top: 40px; }
@@ -22,33 +21,36 @@
         .btn:hover { transform: scale(1.05); }
         
         /* المشهد 2: الزر الهارب */
-        #scene-2 { display: none; opacity: 0; transition: opacity 0.5s ease; width: 100%; height: 100%; flex-direction: column; justify-content: center; align-items: center; }
+        #scene-2 { display: none; opacity: 0; transition: opacity 0.2s ease; width: 100%; height: 100%; flex-direction: column; justify-content: center; align-items: center; }
         .run-btn { background: #3498db; color: white; border: none; padding: 12px 30px; font-size: 18px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); position: relative; transition: all 0.2s ease; }
         
         /* المشهد 3: الورقة والقلب */
-        #scene-3 { display: none; opacity: 0; transition: opacity 0.5s ease; flex-direction: column; align-items: center; }
-        .letter { background: #ecf0f1; color: #2c3e50; padding: 40px 20px; border-radius: 10px; width: 80%; max-width: 300px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); font-size: 22px; font-weight: bold; position: relative; transform: scale(0); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        #scene-3 { display: none; opacity: 0; transition: opacity 0.2s ease; flex-direction: column; align-items: center; }
+        .letter { background: #ecf0f1; color: #2c3e50; padding: 40px 20px; border-radius: 10px; width: 80%; max-width: 300px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); font-size: 22px; font-weight: bold; position: relative; transform: scale(0); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .letter.active { transform: scale(1); }
-        .heart { font-size: 50px; margin-top: 20px; animation: pulse 1s infinite; opacity: 0; transition: opacity 0.5s; }
+        .heart { font-size: 50px; margin-top: 20px; animation: pulse 1s infinite; opacity: 0; transition: opacity 0.3s; }
         
-        /* المشهد 4: كوكب الزمردة */
-        #scene-4 { display: none; opacity: 0; transition: opacity 1s ease; flex-direction: column; align-items: center; }
-        .emerald-planet { width: 200px; height: 200px; background: radial-gradient(circle at 30% 30%, #2ecc71, #0f9b0f, #052e05); border-radius: 50%; box-shadow: 0 0 50px #2ecc71, inset -20px -20px 40px rgba(0,0,0,0.8); margin-bottom: 30px; animation: float 4s ease-in-out infinite; position: relative; }
-        .emerald-planet::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://www.transparenttextures.com/patterns/stardust.png'); border-radius: 50%; opacity: 0.3; }
-        .final-text { font-size: 22px; font-weight: bold; color: #2ecc71; text-shadow: 0 0 10px rgba(46, 204, 113, 0.5); width: 80%; line-height: 1.6; }
+        /* المشهد 4: الخلفية الوردية والورود */
+        #scene-4 { display: none; opacity: 0; transition: opacity 1s ease; flex-direction: column; align-items: center; width: 100%; height: 100%; justify-content: center; position: absolute; top: 0; left: 0; z-index: 5; }
+        .final-text { font-size: 24px; font-weight: bold; color: #d81b60; text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8); width: 85%; line-height: 1.8; z-index: 20; }
+        
+        /* تأثيرات الخلفية الوردية */
+        .pink-bg { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%) !important; }
+        
+        /* الورود المتساقطة */
+        .flower { position: absolute; font-size: 30px; z-index: 1; animation: floatUp linear infinite; bottom: -50px; opacity: 0; }
         
         /* التأثيرات الحركية */
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
-        
-        /* نجوم الخلفية للمشهد الأخير */
-        .stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 2s; z-index: -1; }
-        .stars.active { opacity: 1; background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px); background-size: 100px 100px; }
+        @keyframes floatUp { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            10% { opacity: 1; } 
+            90% { opacity: 1; } 
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } 
+        }
     </style>
 </head>
 <body>
-
-    <div class="stars" id="stars"></div>
 
     <div class="container">
         
@@ -74,14 +76,13 @@
             <div class="heart" id="heart">❤️</div>
         </div>
 
-        <!-- المشهد الرابع -->
-        <div id="scene-4">
-            <div class="emerald-planet"></div>
-            <div class="final-text">
-                عبجبتني عقليتك وطريقة كلامك بزاف ✨
-            </div>
-        </div>
+    </div>
 
+    <!-- المشهد الرابع (خارج الحاوية ليأخذ الشاشة كاملة) -->
+    <div id="scene-4">
+        <div class="final-text" id="finalText">
+            وعجبتني عقليتك وطريقة كلامك بزاف ✨
+        </div>
     </div>
 
     <script>
@@ -94,7 +95,6 @@
         const runBtn = document.getElementById('runBtn');
         const letter = document.getElementById('letter');
         const heart = document.getElementById('heart');
-        const stars = document.getElementById('stars');
 
         let dodgeCount = 0;
 
@@ -104,15 +104,14 @@
             setTimeout(() => {
                 scene1.style.display = 'none';
                 scene2.style.display = 'flex';
-                setTimeout(() => scene2.style.opacity = '1', 50);
-            }, 500);
+                setTimeout(() => scene2.style.opacity = '1', 10); // سرعة في الظهور
+            }, 300);
         });
 
         // 2. الزر الهارب
         const dodgeButton = (e) => {
-            if (e.type === 'touchstart') e.preventDefault(); // منع النقر على الهاتف
-            
-            if (dodgeCount >= 4) return; // يتوقف عن الهروب بعد 4 مرات
+            if (e.type === 'touchstart') e.preventDefault(); 
+            if (dodgeCount >= 4) return;
 
             const maxX = window.innerWidth - 120;
             const maxY = window.innerHeight - 100;
@@ -127,7 +126,6 @@
             dodgeCount++;
             
             if (dodgeCount === 4) {
-                // يعود لمكانه الأصلي بعد التعب
                 runBtn.style.position = 'relative';
                 runBtn.style.left = '0';
                 runBtn.style.top = '0';
@@ -138,34 +136,59 @@
         runBtn.addEventListener('mouseover', dodgeButton);
         runBtn.addEventListener('touchstart', dodgeButton);
 
-        // 3. الضغط على الزر (عرض الورقة والقلب)
+        // 3. الضغط على الزر (عرض الورقة والقلب بسرعة)
         runBtn.addEventListener('click', () => {
             scene2.style.opacity = '0';
             setTimeout(() => {
                 scene2.style.display = 'none';
                 scene3.style.display = 'flex';
-                setTimeout(() => {
-                    scene3.style.opacity = '1';
-                    letter.classList.add('active'); // يظهر الظرف
-                    setTimeout(() => {
-                        heart.style.opacity = '1'; // يظهر القلب
-                    }, 500);
-                }, 50);
-            }, 500);
-
-            // الانتقال للمشهد الرابع بعد 3.5 ثواني
-            setTimeout(() => {
-                scene3.style.opacity = '0';
-                stars.classList.add('active'); // إظهار النجوم
-                document.body.style.background = 'linear-gradient(135deg, #02120a 0%, #052e05 100%)'; // تغيير الخلفية
+                scene3.style.opacity = '1';
                 
+                // ظهور الورقة فوراً
+                letter.classList.add('active'); 
+                
+                // ظهور القلب بعد 0.2 ثانية فقط
+                setTimeout(() => { heart.style.opacity = '1'; }, 200);
+
+                // الانتقال للخلفية الوردية بعد ثانيتين (وقت كافٍ لقراءة الرسالة)
                 setTimeout(() => {
-                    scene3.style.display = 'none';
-                    scene4.style.display = 'flex';
-                    setTimeout(() => scene4.style.opacity = '1', 50);
-                }, 1000);
-            }, 3500);
+                    scene3.style.opacity = '0';
+                    
+                    // تشغيل الخلفية الوردية
+                    document.body.classList.add('pink-bg');
+                    createFlowers(); // تشغيل الورود
+                    
+                    setTimeout(() => {
+                        scene3.style.display = 'none';
+                        scene4.style.display = 'flex';
+                        setTimeout(() => scene4.style.opacity = '1', 50);
+                    }, 300);
+                }, 2000); // 2 ثانية فقط
+                
+            }, 200);
         });
+
+        // دالة إنشاء الورود المتساقطة
+        function createFlowers() {
+            const flowers = ['🌸', '🌹', '🌺', '🌷', '💮', '🌻'];
+            setInterval(() => {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                // اختيار وردة عشوائية
+                flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                // مكان عشوائي على العرض
+                flower.style.left = Math.random() * 100 + 'vw';
+                // سرعة عشوائية
+                flower.style.animationDuration = (Math.random() * 2 + 3) + 's'; // بين 3 و 5 ثواني
+                // حجم عشوائي
+                flower.style.fontSize = (Math.random() * 20 + 20) + 'px'; // بين 20 و 40 بكسل
+                
+                document.body.appendChild(flower);
+                
+                // إزالة الوردة من الكود بعد انتهاء حركتها لعدم إثقال الهاتف
+                setTimeout(() => flower.remove(), 5000);
+            }, 250); // إنشاء وردة كل ربع ثانية
+        }
     </script>
 </body>
 </html>
